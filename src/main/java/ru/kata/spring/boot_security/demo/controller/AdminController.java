@@ -50,9 +50,10 @@ public class AdminController {
     @GetMapping(value = "users/add")
     public String addUser(@ModelAttribute("user") User user, @RequestParam(name = "rolesSelected",
             defaultValue = "0") Long[] rolesId) {
-        List<Long> listRolesId = Arrays.asList(rolesId);
-        Set<Role> roles = new HashSet<>(roleService.getRolesByIds(listRolesId));
-        user.setRoles(roles);
+        userService.setUserRolesByIds(user,rolesId);
+//        List<Long> listRolesId = Arrays.asList(rolesId);
+//        Set<Role> roles = new HashSet<>(roleService.getRolesByIds(listRolesId));
+//        user.setRoles(roles);
         userService.createUser(user);
         return "redirect:/admin";
     }
@@ -65,9 +66,10 @@ public class AdminController {
 
     @GetMapping(value = "users/update")
     public String updateUser(User user, @RequestParam(name = "rolesSelected", defaultValue = "0") Long[] rolesId) {
-        List<Long> listRolesId = Arrays.asList(rolesId);
-        Set<Role> roles = new HashSet<>(roleService.getRolesByIds(listRolesId));
-        user.setRoles(roles);
+        userService.setUserRolesByIds(user,rolesId);
+//        List<Long> listRolesId = Arrays.asList(rolesId);
+//        Set<Role> roles = new HashSet<>(roleService.getRolesByIds(listRolesId));
+//        user.setRoles(roles);
         userService.updateUser(user);
         return "redirect:/admin";
     }
